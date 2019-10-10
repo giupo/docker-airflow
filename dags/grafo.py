@@ -25,15 +25,17 @@ default_args = {
 nodes = {}
 
 dag = DAG("grafo", default_args=default_args, schedule_interval=timedelta(days=1))
-
-with open('/usr/local/airflow/dags/archi.txt') as f:
+filename = "/usr/local/airflow/dags/archi.txt"
+filename = "./archi.txt"
+with open(filename) as f:
     linee = [x.strip() for x in f.readlines()]
     archi = [x.split(' ') for x in linee]
+
+print("aggiunta archi")
 
 for arco in archi:
     n1 = arco[0]
     n2 = arco[1]
-    print("add edge " + str(arco))
 
     if n1 not in nodes:
         nodes[n1] = BashOperator(task_id=n1, bash_command="sleep 1", dag=dag)
@@ -43,3 +45,5 @@ for arco in archi:
     nodes[n2].set_upstream(nodes[n1])
     globals()[n1] = nodes[n1]
     globals()[n2] = nodes[n2]
+
+print("fine aggiunta archi")
