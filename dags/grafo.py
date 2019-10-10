@@ -26,7 +26,7 @@ nodes = {}
 
 dag = DAG("grafo", default_args=default_args, schedule_interval=timedelta(days=1))
 filename = "/usr/local/airflow/dags/archi.txt"
-filename = "./archi.txt"
+#filename = "./archi.txt"
 with open(filename) as f:
     linee = [x.strip() for x in f.readlines()]
     archi = [x.split(' ') for x in linee]
