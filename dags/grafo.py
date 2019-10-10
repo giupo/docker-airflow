@@ -32,7 +32,7 @@ with open('/usr/local/airflow/dags/archi.txt') as f:
 for arco in archi:
     n1 = arco[0]
     n2 = arco[1]
-    print("add edge " + arco)
+    print("add edge " + str(arco))
 
     if n1 not in nodes:
         nodes[n1] = BashOperator(task_id=n1, bash_command="sleep 1", dag=dag)
