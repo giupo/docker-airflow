@@ -7,7 +7,6 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
 
-print ("mannaggia la madonna!!!!!")
 
 default_args = {
     "owner": "airflow",
@@ -33,6 +32,7 @@ with open('/usr/local/airflow/archi.txt') as f:
 for arco in archi:
     n1 = arco[0]
     n2 = arco[1]
+    print("add edge %s-%s" % arco)
 
     if n1 not in nodes:
         nodes[n1] = BashOperator(task_id=n1, bash_command="sleep 1", dag=dag)
@@ -40,3 +40,5 @@ for arco in archi:
         nodes[n2] = BashOperator(task_id=n2, bash_command="sleep 1", dag=dag)
 
     nodes[n2].set_upstream(nodes[n1])
+    globals()[n1] = nodes[n1]
+    globals()[n2] = nodes[n2]
