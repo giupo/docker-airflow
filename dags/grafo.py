@@ -26,7 +26,7 @@ nodes = {}
 
 dag = DAG("grafo", default_args=default_args, schedule_interval=timedelta(days=1))
 
-with open('/usr/local/airflow/archi.txt') as f:
+with open('/usr/local/airflow/dags/archi.txt') as f:
    archi = [x.split(' ') for x in f.readlines() if len(x) > 0]
 
 for arco in archi:
